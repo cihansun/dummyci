@@ -1,19 +1,18 @@
-name: "Terraform Deployment"
-on:
-  # Manual trigger
-  workflow_dispatch:
-  push:
-    paths:
-      - '*/**'
-  pull_request:
-    branches: [ main, release/* ]
-defaults:
-  run:
-    shell: bash
-jobs:
+name: build
 
+on:
+  workflow_call:
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+        description: Access Key
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+        description: Secret Access Key
+
+jobs:
   build:
-    name:   build
+    name:   build-${{ inputs.environment }}
     runs-on: ubuntu-latest
     env:
          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -31,16 +30,3 @@ jobs:
         id: build
         run: |
            cd terraform
-  deploy-dev:
-    needs: build
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: dev
-    secrets: inherit
-  deploy-int:
-    needs: build
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: int
-    secrets: inherit
-
