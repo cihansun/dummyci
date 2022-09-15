@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [release/* ]
-  pull_request:
-    branches: [release/* ]
 defaults:
   run:
     shell: bash
