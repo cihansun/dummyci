@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "b" {
-  name = "${var.project}-${var.environment}-1231213"
+  bucket = "${var.project}-${var.environment}-1231213"
 
   tags = {
     Name        = "My bucket"
