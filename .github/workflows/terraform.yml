@@ -26,20 +26,22 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
+           cd terraform
            rm -rf .terraform
-           terraform init -backend-config=terraform/dev/backend.tfvars -upgrade=true -no-color -input=false
+           terraform init -backend-config=dev/backend.tfvars -upgrade=true -no-color -input=false
       - name: Terraform Plan
         id: plan
         run: |
-          terraform plan -input=false -var-file=terraform/dev/terraform.tfvars -no-color
+          cd terraform
+          terraform plan -input=false -var-file=dev/terraform.tfvars -no-color
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         id: apply
-        run: terraform apply -auto-approve -input=false -var-file=terraform/dev/terraform.tfvars
+        run: terraform apply -auto-approve -input=false -var-file=dev/terraform.tfvars
       - name: Terraform destroy
         if: github.ref == 'refs/heads/destroy'
         id: destroy
-        run: terraform destroy -auto-approve -input=false -var-file=terraform/dev/terraform.tfvars
+        run: terraform destroy -auto-approve -input=false -var-file=dev/terraform.tfvars
   comment:
     runs-on: ubuntu-latest
     needs: terraform
