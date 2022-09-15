@@ -3,11 +3,18 @@ resource "aws_s3_bucket" "b" {
 
   tags = {
     Name        = "My bucket"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
 resource "aws_s3_bucket_acl" "acl" {
   bucket = aws_s3_bucket.b.id
   acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.b.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }

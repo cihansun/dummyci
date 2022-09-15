@@ -1,0 +1,29 @@
+name: "Int and Prod Pipeline"
+on:
+  # Manual trigger
+  workflow_dispatch:
+  push:
+    branches: [release/* ]
+  pull_request:
+    branches: [release/* ]
+defaults:
+  run:
+    shell: bash
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      environment: int
+    secrets: inherit
+  deploy-int:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: int
+    secrets: inherit
+  deploy-prod:
+    needs: deploy-int
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: prod
+    secrets: inherit

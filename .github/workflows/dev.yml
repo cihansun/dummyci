@@ -1,0 +1,25 @@
+name: "Dev Pipeline"
+on:
+  # Manual trigger
+  workflow_dispatch:
+  push:
+    branches: [main, feature/*]
+  pull_request:
+    branches: [main]
+defaults:
+  run:
+    shell: bash
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      environment: dev
+    secrets: inherit
+  deploy-dev:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: dev
+    secrets: inherit
+
+
