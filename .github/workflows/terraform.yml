@@ -15,10 +15,11 @@ jobs:
    name: build
    runs-on: ubuntu-latest
     steps:
-    - name: build dummy
-        id: build
-        run: |
-          echo "dummy build step"
+      - name: build dummy
+      id: build
+      run: |
+        echo "dummy build step"
+          
 
   terraform:
     name:   deploy-dev
