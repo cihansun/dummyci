@@ -4,13 +4,16 @@ on:
   workflow_call:
     inputs:
       environment:
+        description: environment to deploy
         required: true
         type: string
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
+        description: Access Key
       AWS_SECRET_ACCESS_KEY:
         required: true
+        description: Secret Access Key
 
 jobs:
   terraform:
