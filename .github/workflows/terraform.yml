@@ -26,13 +26,11 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
-           cd terraform
            rm -rf .terraform
            terraform init -backend-config=terraform/dev/backend.tfvars -upgrade=true -no-color -input=false
       - name: Terraform Plan
         id: plan
         run: |
-          cd terraform
           terraform plan -input=false -var-file=terraform/dev/terraform.tfvars -no-color
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
