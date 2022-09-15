@@ -26,9 +26,10 @@ jobs:
         run: |
            cd terraform
   terraform:
+    needs: build
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: DEV
+      environment: dev
     secrets: inherit
   comment:
     runs-on: ubuntu-latest
