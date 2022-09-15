@@ -11,16 +11,20 @@ defaults:
   run:
     shell: bash
 jobs:
-  build:
-   name: build
-   runs-on: ubuntu-latest
-    steps:
-      - name: build dummy
-      id: build
-      run: |
-        echo "dummy build step"
-          
 
+  build:
+    name:   build
+    environment: DEV
+    runs-on: ubuntu-latest
+    env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_DEFAULT_REGION: eu-central-1
+    steps:
+      - name: dummy build
+        id: build
+        run: |
+           cd terraform
   terraform:
     name:   deploy-dev
     environment: DEV
