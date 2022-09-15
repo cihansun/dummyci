@@ -31,11 +31,17 @@ jobs:
         id: build
         run: |
            cd terraform
-  terraform:
+  deploy-dev:
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       environment: dev
+    secrets: inherit
+  deploy-int:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      environment: int
     secrets: inherit
   comment:
     runs-on: ubuntu-latest
