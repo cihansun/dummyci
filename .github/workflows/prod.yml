@@ -15,14 +15,14 @@ jobs:
     with:
       environment: int
     secrets: inherit
-  deploy-dev:
+  deploy-int:
     needs: build
     uses: ./.github/workflows/deploy.yml
     with:
       environment: int
     secrets: inherit
   deploy-prod:
-    needs: build
+    needs: deploy-int
     uses: ./.github/workflows/deploy.yml
     with:
       environment: prod
