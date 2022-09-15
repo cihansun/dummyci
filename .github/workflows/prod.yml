@@ -3,8 +3,7 @@ on:
   # Manual trigger
   workflow_dispatch:
   push:
-    paths:
-      - '*/**'
+    branches: [release/* ]
   pull_request:
     branches: [release/* ]
 defaults:
