@@ -12,7 +12,8 @@ defaults:
     shell: bash
 jobs:
   terraform:
-    name:   deploy-test
+    name:   deploy-dev
+    environment: DEV
     runs-on: ubuntu-latest
     env:
          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
