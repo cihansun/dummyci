@@ -41,7 +41,6 @@ jobs:
           cd terraform
           terraform plan -input=false -var-file=${{ inputs.environment }}/terraform.tfvars -no-color
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
         id: apply
         run: |
           cd terraform 
